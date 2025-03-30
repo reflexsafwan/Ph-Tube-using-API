@@ -5,10 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ph Tube using API</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
+    <header class="container mx-auto ">
+        <nav class="flex justify-between items-center p-4 py-5 border-b-2 border-[#17171733]">
+            <div class="logo">
+                <img src="/assets/Logo.png" alt="">
+            </div>
+            <div>
+                <button class=" px-4 py-2 bg-[#25252570] rounded-xl text-white text-xl">Sort by view</button>
+            </div>
+            <div>
+                <button class="px-5 py-3 bg-red-600 rounded-xl text-white text-xl">Blogs</button>
+            </div>
+        </nav>
+        <nav class="mt-5 ">
+            <ul id="li-container" class="flex justify-center  gap-5">
+                <li class=" btn btn-sm  text-lg text-red-600"><a href="#">ALL</a></li>
+                <!-- <li class="btn btn-sm px-4 py-2 text-lg"><a href="#">About</a></li>
+                <li class="btn btn-sm px-4 py-2 text-lg"><a href="#">Contact</a></li>
+                <li class="btn btn-sm px-4 py-2 text-lg"><a href="#">Blog</a></li> -->
+            </ul>
+        </nav>
+    </header>
 
+
+    <script src="./js/app.js"></script>
 </body>
 
 </html>
