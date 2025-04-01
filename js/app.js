@@ -1,3 +1,12 @@
+const showLoader = () => {
+  document.getElementById("loader").classList.remove("hidden");
+  document.getElementById("card-container").classList.add("hidden");
+};
+const removeLoader = () => {
+  document.getElementById("loader").classList.add("hidden");
+  document.getElementById("card-container").classList.remove("hidden");
+};
+
 const removeActiveClass = () => {
   const activeClass = document.getElementsByClassName("active");
 
@@ -20,6 +29,7 @@ const loadCatagories = async () => {
 };
 
 const loadAllVedios = async (searchText = "") => {
+  showLoader();
   try {
     const res = await fetch(
       `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`
@@ -30,12 +40,14 @@ const loadAllVedios = async (searchText = "") => {
     const btnAll = document.getElementById("btn-all");
     btnAll.classList.add("active");
     showVedios(vedios);
+    removeLoader();
   } catch (error) {
     console.log(error);
   }
 };
 
 const loadCatagoryVedios = async (id) => {
+  showLoader();
   try {
     const res = await fetch(
       ` https://openapi.programming-hero.com/api/phero-tube/category/${id}`
@@ -48,6 +60,7 @@ const loadCatagoryVedios = async (id) => {
     clickedButton.classList.add("active");
 
     showVedios(vedios);
+    removeLoader();
   } catch (error) {
     console.log(error);
   }
