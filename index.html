@@ -19,7 +19,7 @@
     <header class="container mx-auto ">
         <nav class="flex justify-between items-center p-4 py-5 border-b-2 border-[#17171733]">
             <div class="logo">
-                <img src="/assets/Logo.png" alt="">
+                <img src="./assets/Logo.png" alt="">
             </div>
             <div>
                 <button class=" px-4 py-2 bg-[#25252570] rounded-xl text-white text-xl">Sort by view</button>
@@ -75,6 +75,27 @@
             </div>
 
         </section>
+
+        <!-- modal -->
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="vedio_details" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="details_container">
+
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button  in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+
+        
+
     </main>
 
 

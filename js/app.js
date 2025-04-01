@@ -1,6 +1,6 @@
 const removeActiveClass = () => {
   const activeClass = document.getElementsByClassName("active");
-  console.log(activeClass);
+
   for (let btn of activeClass) {
     btn.classList.remove("active");
   }
@@ -36,7 +36,6 @@ const loadAllVedios = async () => {
 };
 
 const loadCatagoryVedios = async (id) => {
-  console.log(id);
   try {
     const res = await fetch(
       ` https://openapi.programming-hero.com/api/phero-tube/category/${id}`
@@ -49,6 +48,19 @@ const loadCatagoryVedios = async (id) => {
     clickedButton.classList.add("active");
 
     showVedios(vedios);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const loadVedioDetails = async (id) => {
+  try {
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
+    );
+    const data = await res.json();
+
+    showModals(data.video);
   } catch (error) {
     console.log(error);
   }
@@ -85,7 +97,9 @@ const showVedios = (vedios) => {
     div.innerHTML = `
     <div class="card bg-base-100 shadow-sm">
                 <figure>
-                    <img class=" w-full h-65 rounded object-cover" src=${vedio.thumbnail} />
+                    <img class=" w-full h-65 rounded object-cover" src=${
+                      vedio.thumbnail
+                    } />
                     <p></p>
                 </figure>
                 <div class="card-body">
@@ -98,13 +112,53 @@ const showVedios = (vedios) => {
                         <h2>${vedio.title}</h2>
                     </div>
                   
-                    <p>${vedio.authors[0].profile_name} </p>
+                    <p class ="flex  items-center">
+                    ${vedio.authors[0].profile_name} 
+                    ${
+                      vedio.authors[0].verified == true
+                        ? `<img class="w-6 h-6 ml-2" src="./assets/verified.png" alt="">`
+                        : ``
+                    } 
+
+                    
+                    </p>
                     <p>${vedio.others.views}</p>
                 </div>
+                <button onclick = "loadVedioDetails('${
+                  vedio.video_id
+                }')" class ="btn"> Show Details</button>
             </div>
     `;
     cardContainer.appendChild(div);
   });
+};
+const showModals = (data) => {
+  const str = data.description;
+  const sliceDes = str.slice(0, 105);
+  console.log(str);
+  document.getElementById("vedio_details").showModal();
+  const detailsContainer = document.getElementById("details_container");
+
+  const div = document.createElement("div");
+  div.innerHTML = `
+        <div class="card bg-base-100 w-full  shadow-sm">
+          <figure class="px-10 pt-10">
+            <img
+              src=${data.thumbnail}
+              alt="Shoes"
+              class="rounded-xl" />
+          </figure>
+          <div class="card-body items-center text-center">
+            <h2 class="card-title">${data.title}</h2>
+            <p>${sliceDes}</p>
+            <div class="card-actions">
+              
+            </div>
+          </div>
+        </div>
+  
+  `;
+  detailsContainer.appendChild(div);
 };
 
 loadCatagories();
