@@ -19,10 +19,10 @@ const loadCatagories = async () => {
   }
 };
 
-const loadAllVedios = async () => {
+const loadAllVedios = async (searchText = "") => {
   try {
     const res = await fetch(
-      "https://openapi.programming-hero.com/api/phero-tube/videos"
+      `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`
     );
     const data = await res.json();
     const vedios = data.videos;
@@ -160,5 +160,10 @@ const showModals = (data) => {
   `;
   detailsContainer.appendChild(div);
 };
+
+document.getElementById("input-field").addEventListener("keyup", (e) => {
+  const input = e.target.value;
+  loadAllVedios(input);
+});
 
 loadCatagories();
